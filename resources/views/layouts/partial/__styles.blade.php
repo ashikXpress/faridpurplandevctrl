@@ -48,6 +48,9 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('themes/backend/dist/css/adminlte.min.css') }}">
 <link rel="stylesheet" href="{{ asset('themes/backend/dist/css/custom.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 <style>
     /* Remove arrow style (spinners) from number input */
     input[type="number"]::-webkit-inner-spin-button,
@@ -66,5 +69,18 @@
     }
     .dark-mode .dropdown-item.active, .dropdown-item:active {
         background-color: #087fff;
+    }
+    table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled) {
+        white-space: nowrap;
+    }
+    table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+        white-space: nowrap;
+    }
+    .main-sidebar .brand-text, .main-sidebar .logo-xl, .main-sidebar .logo-xs, .sidebar .nav-link p, .sidebar .user-panel .info,
+    .navbar-light .navbar-nav .nav-link,table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled),
+    table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td,.content-header h1,.card-title,.btn,
+    .form-group label,.form-control,.dropdown-menu-lg .dropdown-item,a,.info-box .info-box-text, .info-box .progress-description,
+    .info-box .info-box-number{
+        font-family: "Tiro Bangla", serif !important;
     }
 </style>

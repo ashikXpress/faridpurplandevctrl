@@ -186,27 +186,27 @@
         let datatableExportButton = [
             {
                 "extend": "copy",
-                "text": "<i class='fas fa-copy'></i> Copy",
+                "text": "<i class='fas fa-copy'></i> কপি",
                 "className": "btn btn-purple bg-gradient-purple btn-sm"
             },{
             "extend": "csv",
-            "text": "<i class='fas fa-file-csv'></i> Export to CSV",
+            "text": "<i class='fas fa-file-csv'></i> এক্সপোর্ট তো সিএসভি",
             "className": "btn btn-purple bg-gradient-purple btn-sm"
         },
             {
                 "extend": "excel",
-                "text": "<i class='fas fa-file-excel'></i> Export to Excel",
+                "text": "<i class='fas fa-file-excel'></i> এক্সপোর্ট তো এক্সেল",
                 "className": "btn btn-purple bg-gradient-purple btn-sm"
             },
 
             {
                 "extend": "print",
-                "text": "<i class='fas fa-print'></i> Print",
+                "text": "<i class='fas fa-print'></i> প্রিন্ট",
                 "className": "btn btn-purple bg-gradient-purple btn-sm"
             },
             {
                 "extend": "colvis",
-                "text": "<i class='fas fa-eye'></i> Column visibility",
+                "text": "<i class='fas fa-eye'></i> কলাম ভিসিবিলিটি",
                 "className": "btn btn-purple bg-gradient-purple btn-sm"
             }
         ];
@@ -338,5 +338,27 @@
         if (notificationSound) {
             notificationSound.play();
         }
+    }
+    function en2bn(number) {
+        // Check if the numberString is a string
+        if (typeof number !== 'string') {
+            console.error('Input is not a string:', number);
+            return number; // Return input unchanged
+        }
+        const digitsMap = {
+            '0': '০',
+            '1': '১',
+            '2': '২',
+            '3': '৩',
+            '4': '৪',
+            '5': '৫',
+            '6': '৬',
+            '7': '৭',
+            '8': '৮',
+            '9': '৯'
+        };
+
+        // Replace each digit with its Bengali equivalent
+        return number.replace(/\d/g, digit => digitsMap[digit]);
     }
 </script>

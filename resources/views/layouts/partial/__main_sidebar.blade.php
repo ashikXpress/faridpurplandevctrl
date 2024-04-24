@@ -35,8 +35,33 @@
                         <p>ব্যবহারকারী</p>
                     </a>
                 </li>
+
                 <?php
-                $subMenu = ['plan-service-category.index','plan-service-category.create','plan-service-category.edit']
+                $subMenu = ['area.index',
+                    'area.create','area.edit']
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
+                       href="{{ route('area.index') }}">
+                        <i class="fa fa-wrench nav-icon"></i>
+                        মহল্লা</a>
+                </li>
+
+                <?php
+                $subMenu = ['supporting-document-category.index',
+                    'supporting-document-category.create','supporting-document-category.edit']
+                ?>
+                <li class="nav-item">
+                    <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
+                       href="{{ route('supporting-document-category.index') }}">
+                        <i class="fa fa-wrench nav-icon"></i>
+                        সাপোর্টিং ডকুমেন্ট ক্যাটাগরি</a>
+                </li>
+                <?php
+                $subMenu = ['plan-service-category.index',
+                    'plan-service-category.create',
+                    'plan-service-category.edit',
+                    'add-plan-service-category-supporting-document-items']
                 ?>
                 <li class="nav-item">
                     <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
@@ -45,7 +70,9 @@
                         প্ল্যান সার্ভিস ক্যাটাগরি</a>
                 </li>
                 @php
-                    $menu = [];
+                    $planServiceCategories = \App\Models\PlanServiceCategory::where('status',1)
+                               ->orderBy('sort')->get();
+                       $menu = ['plan_service_order'];
                 @endphp
 
                 <li class="nav-item {{ in_array(Route::currentRouteName(), $menu) ? 'menu-open' : '' }}">
@@ -58,34 +85,63 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php
-                        $subMenu = [];
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
-                               href="#">
-                                <i class="far  {{  in_array(Route::currentRouteName(), $subMenu)  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
-                                নতুন আবেদনের তালিকা</a>
-                        </li>
-                        <?php
-                        $subMenu = [];
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
-                               href="#">
-                                <i class="far  {{  in_array(Route::currentRouteName(), $subMenu)  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
-                                অনুমোদিত আবেদনের তালিকা</a>
-                        </li>
-                        <?php
-                        $subMenu = [];
-                        ?>
-                        <li class="nav-item">
-                            <a class="nav-link {{ in_array(Route::currentRouteName(), $subMenu) ? 'active' : '' }}"
-                               href="#">
-                                <i class="far  {{  in_array(Route::currentRouteName(), $subMenu)  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
-                                বাতিল আবেদনের তালিকা </a>
-                        </li>
-
+                        <li class="nav-item {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::PENDING ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p>
+                                        নতুন আবেদনের তালিকা
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                   @foreach($planServiceCategories as $planServiceCategory)
+                                    <li class="nav-item">
+                                        <a  class="nav-link  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::PENDING && request('planServiceCategory') == $planServiceCategory->id  ? 'active' : '' }}" href="{{ route('plan_service_order',['planServiceCategory'=>$planServiceCategory->id,'status'=>\App\Enumeration\ServiceOrderStatus::PENDING]) }}">
+                                            <i class="far  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::PENDING && request('planServiceCategory') == $planServiceCategory->id  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
+                                            <p>{{ $planServiceCategory->name }}</p>
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        <li class="nav-item {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::APPROVED ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p style="font-size: 12px">
+                                        অনুমোদিত আবেদনের তালিকা
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach($planServiceCategories as $planServiceCategory)
+                                        <li class="nav-item">
+                                            <a  class="nav-link  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::APPROVED && request('planServiceCategory') == $planServiceCategory->id  ? 'active' : '' }}" href="{{ route('plan_service_order',['planServiceCategory'=>$planServiceCategory->id,'status'=>\App\Enumeration\ServiceOrderStatus::APPROVED]) }}">
+                                                <i class="far  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::APPROVED && request('planServiceCategory') == $planServiceCategory->id  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
+                                                <p>{{ $planServiceCategory->name }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        <li class="nav-item {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::REJECTED ? 'menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p>
+                                        বাতিল আবেদনের তালিকা
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach($planServiceCategories as $planServiceCategory)
+                                        <li class="nav-item">
+                                            <a  class="nav-link  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::REJECTED && request('planServiceCategory') == $planServiceCategory->id  ? 'active' : '' }}" href="{{ route('plan_service_order',['planServiceCategory'=>$planServiceCategory->id,'status'=>\App\Enumeration\ServiceOrderStatus::REJECTED]) }}">
+                                                <i class="far  {{ in_array(Route::currentRouteName(), $menu) && request('status') == \App\Enumeration\ServiceOrderStatus::REJECTED && request('planServiceCategory') == $planServiceCategory->id  ? 'fa-check-circle' : 'fa-circle' }} nav-icon"></i>
+                                                <p>{{ $planServiceCategory->name }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
                     </ul>
                 </li>
             </ul>

@@ -25,7 +25,10 @@ class HomeController extends Controller
     }
     public function home()
     {
-        $planServiceCategories = PlanServiceCategory::orderBy('sort')->where('status',1)->get();
-        return view('frontend.home',compact('planServiceCategories'));
+        $planServiceCategories = PlanServiceCategory::where('main_service',0)->orderBy('sort')->where('status',1)->get();
+        $mainPlanService = \App\Models\PlanServiceCategory::where('main_service',1)
+            ->where('status',1)
+            ->first();
+        return view('frontend.home',compact('planServiceCategories','mainPlanService'));
     }
 }

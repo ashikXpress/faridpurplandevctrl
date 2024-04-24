@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('plan_service_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('main_service')->default(0)->comment('1=main service,0=other');
+            $table->boolean('is_need_plan_no')->default(0)->comment('1=Yes,0=No');
             $table->integer('sort');
             $table->string('slug')->unique();
             $table->float('fees', 20);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Enumeration\Role;
 use App\Models\User;
@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        return view('admin.user.index');
    }
     public function dataTable()
     {
@@ -46,7 +46,7 @@ class UserController extends Controller
     public function create()
     {
 
-        return view('user.create');
+        return view('admin.user.create');
    }
 
     public function store(Request $request)
@@ -100,7 +100,7 @@ class UserController extends Controller
             abort('404');
         }
 
-        return view('user.edit',compact('user'));
+        return view('admin.user.edit',compact('user'));
    }
 
     public function update(User $user,Request $request)

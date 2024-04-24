@@ -18,11 +18,11 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link" href="#">--}}
-{{--                <i class="fa fa-database"></i>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('home') }}">
+                <i class="fa fa-home"></i>
+            </a>
+        </li>
 
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
