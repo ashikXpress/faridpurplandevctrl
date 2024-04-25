@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request['mobile_no'] = bn2en($request->mobile_no);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'mobile_no' => ['required', 'string', 'lowercase', 'digits:11', 'unique:'.User::class],

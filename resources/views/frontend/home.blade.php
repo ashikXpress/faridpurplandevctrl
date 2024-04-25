@@ -1,5 +1,5 @@
 @extends('layouts.frontend')
-@section('title','Home')
+@section('title','হোম')
 <style>
     section.banner-area {
         background: #f8f9fa;
