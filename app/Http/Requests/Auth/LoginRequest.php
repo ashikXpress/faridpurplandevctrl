@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enumeration\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -46,11 +47,13 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
         if ($loginType == 1){
             $user = User::where('mobile_no', bn2en($this->email))
+                ->where('role',Role::$USER)
                 ->first();
         }else{
             $user = User::where('email', $this->email)
                 ->orWhere('username', $this->email)
                 ->orWhere('mobile_no', bn2en($this->email))
+                ->whereIn('role',[Role::$ADMIN,Role::$BCC_USER])
                 ->first();
         }
 
