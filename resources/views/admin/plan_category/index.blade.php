@@ -38,11 +38,17 @@
                 ajax: '{{ route('plan-service-category.datatable') }}',
                 "pagingType": "full_numbers",
                 columns: [
-                    {data: 'sort', name: 'sort',className:'text-center'},
+                    {data: 'sort', name: 'sort',
+                        render: function(data) {
+                            return en2bn(data);
+                        }
+                        ,className:'text-center'
+                    },
                     {data: 'name', name: 'name'},
+
                     {data: 'fees', name: 'fees',
                         render: function(data) {
-                            return jsNumberFormat(parseFloat(data).toFixed(2));
+                            return en2bn(jsNumberFormat(parseFloat(data).toFixed(2)));
                         }
                         ,className:'text-right'
                     },

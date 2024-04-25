@@ -38,7 +38,12 @@
                 ajax: '{{ route('supporting-document-category.datatable') }}',
                 "pagingType": "full_numbers",
                 columns: [
-                    {data: 'sort', name: 'sort',className:'text-center'},
+                    {data: 'sort', name: 'sort',
+                        render: function(data) {
+                            return en2bn(data);
+                        }
+                        ,className:'text-center'
+                    },
                     {data: 'title', name: 'title'},
                     {data: 'file_types', name: 'file_types'},
                     {data: 'status', name: 'status',className:'text-center'},

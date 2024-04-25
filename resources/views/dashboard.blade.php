@@ -121,12 +121,12 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-9 order-xs-1">
                             <div class="card-title">
                                 আবেদনের পরিসংখ্যান
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 order-xs-2">
                             <form action="{{ route('dashboard') }}" id="dashboard_year_form" method="get">
                                 <div class="form-group mb-0">
                                     <select name="dashboard_year" class="form-control select2" id="dashboard_year">
@@ -197,25 +197,25 @@
                     labels: months,
                     datasets: [
                         {
-                            label: 'Pending',
+                            label: 'অনুমোদন অপেক্ষারত',
                             data: pendingData,
                             borderColor: '#ffc107', // Set color for pending line
                             tension: 0.4, // Adjust the curve tension
-                            fill: false,
+                            fill: true,
                         },
                         {
-                            label: 'Approved',
+                            label: 'অনুমোদিত',
                             data: approvedData,
                             borderColor: '#28a745', // Set color for approved line
                             tension: 0.4, // Adjust the curve tension
-                            fill: false,
+                            fill: true,
                         },
                         {
-                            label: 'Rejected',
+                            label: 'অননুমোদিত',
                             data: rejectedData,
                             borderColor: '#dc3545', // Set color for rejected line
                             tension: 0.4, // Adjust the curve tension
-                            fill: false,
+                            fill: true,
                         }
                     ]
                 },
@@ -258,7 +258,7 @@
                             data: collect_fees,
                             borderColor: '#28a745', // Set color for approved line
                             tension: 0.4, // Adjust the curve tension
-                            fill: false,
+                            fill: true,
                         },
                     ]
                 },

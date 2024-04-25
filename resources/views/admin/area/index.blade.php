@@ -37,7 +37,12 @@
                 ajax: '{{ route('area.datatable') }}',
                 "pagingType": "full_numbers",
                 columns: [
-                    {data: 'area_no', name: 'area_no',className:'text-center'},
+                    {data: 'area_no', name: 'area_no',
+                        render: function(data) {
+                            return en2bn(data);
+                        }
+                        ,className:'text-center'
+                    },
                     {data: 'area_name', name: 'area_name',className:'text-left'},
                     {data: 'ward_no', name: 'ward.ward_no',className:'text-center'},
                     {data: 'action', name: 'action', orderable: false,className:'text-center'},

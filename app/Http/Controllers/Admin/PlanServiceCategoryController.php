@@ -30,8 +30,9 @@ class PlanServiceCategoryController extends Controller
         return DataTables::eloquent($query)
             ->addIndexColumn()
             ->addColumn('action', function(PlanServiceCategory $planCategory) {
+                $isSupportingDocuments = count($planCategory->supportingDocumentItems);
                 $btn = '';
-                $btn .= ' <a href="' . route('add-plan-service-category-supporting-document-items', ['planServiceCategory' => $planCategory->id]) . '" class="btn btn-purple bg-gradient-primary btn-sm"><i class="fa fa-folder"></i> Add document categories</a>';
+                $btn .= ' <a href="' . route('add-plan-service-category-supporting-document-items', ['planServiceCategory' => $planCategory->id]) . '" class="btn btn-purple bg-gradient-purple btn-sm"><i class="'.($isSupportingDocuments > 0 ? 'fa fa-edit' :'fa fa-plus').'"></i> '.($isSupportingDocuments > 0 ? 'সাপোর্টিং ডকুমেন্ট ক্যাটাগরি সম্পাদনা করুন' : 'সাপোর্টিং ডকুমেন্ট ক্যাটাগরি যোগ করুন').'</a>';
                 $btn .= ' <a href="' . route('plan-service-category.edit', ['plan_service_category' => $planCategory->id]) . '" class="btn btn-purple bg-gradient-purple btn-sm btn-edit"><i class="fa fa-edit"></i></a>';
                 $btn .= ' <a role="button" data-id="' . $planCategory->id . '" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash"></i></a>';
 

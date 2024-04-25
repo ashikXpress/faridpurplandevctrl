@@ -94,7 +94,6 @@
         }
 
         .su-footer-logo img {
-            position: absolute;
             height: 69px;
             bottom: -59px;
         }
@@ -179,13 +178,31 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
-        .develop-by{
+        .develop-by {
             background: #ffffff !important;
             display: inline-block;
             padding: 3px 11px;
             border-radius: 3px;
-            box-shadow: 1px 5px 6px 0px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .08);
+            box-shadow: 1px 5px 6px 0 rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .08);
             font-size: 13px;
+            margin-top: 18px;
+        }
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            li.nav-item a.login-btn {
+                color: #000;
+                border-radius: 0;
+                border: 0px solid #fff;
+            }
+            li.nav-item a.login-btn:hover{
+                background: none;
+                color: #000;
+            }
+            .login-btn.active {
+                background: none;
+                color: #000 !important;
+                border-radius: 0 !important;
+            }
         }
     </style>
     @yield('style')
@@ -289,12 +306,15 @@
                     <li><a class="footer-link" href="#privacy-policy">প্রাইভেসি পলিসি</a></li>
                     <li><a class="footer-link" href="#terms-of-service">টার্মস অফ সার্ভিসেস</a></li>
                 </ul>
-                <p class="develop-by">Design & Developed by <a target="_blank" href="https://2aitlimited.com">2ait Limited</a></p>
+
             </div>
             <div class="col-12 col-md-3">
                 <div class="contact-number-area">
-                    <div class="contact-number">Contact No. <a href="tel:017xxxxxxxx">017xxxxxxxx</a></div>
+                    <div class="contact-number">যোগাযোগের নম্বর <a href="tel:01700000000">{{ en2bn('01700000000') }}</a></div>
                 </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <p class="develop-by">Design & Developed by <a target="_blank" href="https://2aitlimited.com">2ait Limited</a></p>
             </div>
         </div>
     </div>

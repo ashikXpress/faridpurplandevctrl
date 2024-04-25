@@ -3,6 +3,7 @@
 <style>
     section.banner-area {
         background: #f8f9fa;
+        overflow: hidden;
     }
     section.banner-area img {
         width: 100%;
@@ -25,9 +26,7 @@
     }
     .banner-card-body {
         padding: 2.4rem;
-        position: absolute;
-        left: 0;
-        top: 25%;
+        margin-top: 69px;
     }
     .banner-title{
         font-family: "Tiro Bangla", serif;
